@@ -1,0 +1,10 @@
+# the loading screen, then a quick play
+2200 splash
+400 shot
+1000 shot
+1700 shot
+2500 keys 0x4081
+3000 shot
+3500 btn 6
+4200 shot
+5000 end

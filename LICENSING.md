@@ -1,6 +1,6 @@
 # Licensing
 
-Dinghy is free software under the GNU General Public License, version 3 only (`GPL-3.0-only`, full text in
+TripDeck is free software under the GNU General Public License, version 3 only (`GPL-3.0-only`, full text in
 `LICENSE`). You may use, study, change and share it. If you give someone a firmware built from it, give them its
 complete source under the same licence too.
 
@@ -9,7 +9,9 @@ complete source under the same licence too.
 | | |
 | --- | --- |
 | The platform: `firmware/hal/`, `firmware/loader/`, `crt0.S`, `app.ld`, `firmware/src/` (`usb.c`, `ota.c`, `recovery.c`, `lcd.c`, `gfx.c`, `libc.c`, `bootguard.h`, `uac_fir.h`), `tools/` | Copyright (C) 2026 Leo Kuroshita (@kurogedelic), Hügelton Instruments ([Felucca](https://github.com/hugelton/Felucca)), with the changes of [SLOOP](https://github.com/isod89/sloop-fm1) (isod89) |
-| The app `firmware/src/dinghy.c`, the wiring `platform.c`, the host mode `tests/`, the docs | zvenson |
+| The wiring `platform.c`, the host mode `tests/host.c` and the docs it comes with | zvenson ([Dinghy](https://github.com/zvenson/dinghy)) |
+| CyberDeck: the synth voice, arpeggiator, sequencer and patch mutator that TripDeck builds on | the CyberDeck project of this family of firmwares |
+| TripDeck: `firmware/src/tripdeck.c`, `voices.h`, `fx.h`, `scene_vis.h`, `scene_audio.h`, the tests and `docs/MANUAL.md` | anonymousacademe, GPL-3.0-only |
 
 ## Third-party material
 
@@ -20,10 +22,9 @@ complete source under the same licence too.
 
 ## The logo
 
-`assets/logo.svg` / `logo.png` carry the designburg signet: Copyright (C) designburg, all rights reserved, not under
-the GPL. It marks Dinghy itself; a fork uses its own logo.
+The designburg signet that Dinghy carried is not part of TripDeck (it is Copyright (C) designburg, all rights reserved, and marks Dinghy itself).
 
 ## Trademarks
 
 "Felucca" and "Hügelton Instruments" are names of Hügelton Instruments; "M-VAVE" and "FM-1" belong to their
-owners. Dinghy is not made or endorsed by them.
+owners. TripDeck is not made or endorsed by them.

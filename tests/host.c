@@ -105,6 +105,8 @@ static uint32_t script_n = sizeof SCRIPT0 / sizeof SCRIPT0[0], end_ms = 6500, fr
 static uint32_t SHOT[16] = {1000, 3000}, shot_n = 2;
 
 static int shot_script;
+static void (*host_param_cb)(uint32_t, uint32_t);   /* the app sets this: "T param IDX VAL" sets a parameter (see tripdeck.c) */
+static uint32_t host_splash_ms;                 /* "T splash": run the loading screen for T ms before the app starts */
 static void read_script(const char *path)
 {
     static host_ev_t ev[4096];
@@ -117,10 +119,12 @@ static void read_script(const char *path)
         unsigned a = 0, b = 0, c = 0;
         if (line[0] == '#' || sscanf(line, "%u %15s", &e.t, what) != 2) continue;
         if (!strcmp(what, "end")) { end_ms = e.t; continue; }
+        if (!strcmp(what, "splash")) { host_splash_ms = e.t; continue; }
         if (!strcmp(what, "shot")) { if (!shot_script) { shot_n = 0; shot_script = 1; } if (shot_n < 16u) SHOT[shot_n++] = e.t; continue; }
         if (!strcmp(what, "keys")) { sscanf(line, "%*u %*s %i", (int *)&e.keys); }
         else if (!strcmp(what, "enc")) { int id = 0, dn = 0; sscanf(line, "%*u %*s %d %d", &id, &dn); e.btn = 100 + id; e.keys = (uint32_t)dn; }
         else if (!strcmp(what, "btn")) { int dur = 0; sscanf(line, "%*u %*s %d %d", &e.btn, &dur); e.keys = (uint32_t)dur; }
+        else if (!strcmp(what, "param")) { int id = 0, val = 0; sscanf(line, "%*u %*s %d %d", &id, &val); e.btn = 200 + id; e.keys = (uint32_t)val; }
         else if (!strcmp(what, "midi")) { sscanf(line, "%*u %*s %i %u %u", (int *)&a, &b, &c); e.st = (uint8_t)a; e.d1 = (uint8_t)b; e.d2 = (uint8_t)c; }
         else continue;
         ev[n++] = e;
@@ -182,6 +186,8 @@ static void platform_poll(void)                 /* one call = one millisecond */
         if (script[step].st) {
             mq[mq_w % 64u][0] = script[step].st; mq[mq_w % 64u][1] = script[step].d1; mq[mq_w % 64u][2] = script[step].d2;
             mq_w++;
+        } else if (script[step].btn >= 200) {
+            if (host_param_cb) host_param_cb((uint32_t)script[step].btn - 200u, script[step].keys);
         } else if (script[step].btn >= 100)
             host_enc[(script[step].btn - 100) & 7] += (int32_t)script[step].keys;
         else if (script[step].btn >= 0)

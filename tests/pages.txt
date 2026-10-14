@@ -1,0 +1,68 @@
+# every page is a picture; knobs change it. Then HOME shows the parameters.
+100 keys 0x4081
+500 enc 2 6
+560 enc 3 6
+620 enc 4 5
+680 enc 5 5
+1900 shot
+2100 btn 3
+2300 enc 2 6
+2360 enc 3 6
+2420 enc 4 5
+2480 enc 5 5
+3700 shot
+3900 btn 3
+4100 enc 2 6
+4160 enc 3 6
+4220 enc 4 5
+4280 enc 5 5
+5500 shot
+5700 btn 3
+5900 enc 2 6
+5960 enc 3 6
+6020 enc 4 5
+6080 enc 5 5
+7300 shot
+7500 btn 3
+7700 enc 2 6
+7760 enc 3 6
+7820 enc 4 5
+7880 enc 5 5
+9100 shot
+9300 btn 3
+9500 enc 2 6
+9560 enc 3 6
+9620 enc 4 5
+9680 enc 5 5
+10900 shot
+11100 btn 3
+11300 enc 2 6
+11360 enc 3 6
+11420 enc 4 5
+11480 enc 5 5
+12700 shot
+12900 btn 3
+13100 enc 2 6
+13160 enc 3 6
+13220 enc 4 5
+13280 enc 5 5
+14500 shot
+14700 btn 3
+14900 enc 2 6
+14960 enc 3 6
+15020 enc 4 5
+15080 enc 5 5
+16300 shot
+16500 btn 3
+16700 enc 2 6
+16760 enc 3 6
+16820 enc 4 5
+16880 enc 5 5
+18100 shot
+18300 btn 8
+19000 shot
+19100 btn 3
+19800 shot
+19900 btn 8
+20500 shot
+20700 end
