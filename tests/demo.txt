@@ -1,0 +1,19 @@
+# preset 1 NEON RAIN: a chord, then open the filter and ping-pong the delay; then preset 2 mono bass
+100 keys 0x4081
+500 shot
+1500 enc 2 5
+1800 enc 4 -4
+2300 shot
+3000 keys 0
+3300 btn 4
+3400 enc 2 -6
+3500 enc 3 8
+4600 enc 6 1
+4700 keys 0x1
+4900 shot
+5400 keys 0x4
+6000 keys 0
+6200 btn 2
+6300 enc 2 10
+6900 shot
+7500 end

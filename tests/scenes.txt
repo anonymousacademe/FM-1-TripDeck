@@ -1,0 +1,33 @@
+100 keys 0x4081
+300 btn 6
+1800 shot
+1900 enc 2 8
+1950 enc 3 6
+2000 enc 4 5
+3500 shot
+3900 btn 4
+5400 shot
+5500 enc 2 8
+5550 enc 3 6
+5600 enc 4 5
+7100 shot
+7500 btn 5
+9000 shot
+9100 enc 2 8
+9150 enc 3 6
+9200 enc 4 5
+10700 shot
+11100 btn 2
+12600 shot
+12700 enc 2 8
+12750 enc 3 6
+12800 enc 4 5
+14300 shot
+14700 btn 7
+16200 shot
+16300 enc 2 8
+16350 enc 3 6
+16400 enc 4 5
+17900 shot
+18300 keys 0
+18500 end
