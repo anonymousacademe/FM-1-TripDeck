@@ -79,6 +79,47 @@ DREAM KEYS (electric piano), SPIRAL DUB (a dub pad with sinking echoes). **SAVE*
 - The top line shows the tempo, `ARP`/`HLD`, `>` (playing) and `REC`.
 - See `..\cyberdeck\docs\MANUAL.md` for the arpeggiator and sequencer in detail.
 
+## MIDI and USB
+
+### Playing from an external keyboard (MIDI in)
+
+There are two ways in, and the synth cannot tell them apart:
+
+- **The 3.5 mm TRS jack (MIDI in).** Connect a keyboard's 5-pin DIN **MIDI OUT** to the jack with a DIN-to-TRS cable or adapter of **type A**. The jack is an input only: the FM-1 has no MIDI out jack. This input is new and **not yet tried by us on a TripDeck unit** (the same code runs in CyberDeck); see "The TRS jack does nothing" below.
+- **USB-MIDI** from a computer or phone. A USB keyboard cannot plug into the FM-1 directly (its USB port is device-only), so connect it to the computer or phone, or use a small USB-host box.
+
+What it understands, on **any channel**:
+
+| Message | What it does |
+|---|---|
+| Note on / off | Plays the notes, with velocity, through the scale lock like the panel keys. A chord played at once sounds in full. With the arpeggiator on, held notes are arpeggiated; with REC armed, notes are recorded |
+| Pitch wheel | Bends the pitch of every voice (PAD, SITAR, ORGAN, BELL), about two semitones up and down. The tamboura drone under SITAR stays put |
+| Program change 0-7 | Selects the patch (1-8); the picture shows its name |
+| CC 123, CC 120 | All notes off (panic) |
+| CC 74 / 71 / 73 / 72 | Cutoff / resonance / attack / release |
+| CC 1 | LFO depth (the mod wheel) |
+| CC 91 | Reverb |
+
+Not handled: sustain pedal (CC 64), aftertouch, MIDI clock (Start/Stop/Clock bytes are received but ignored).
+
+### MIDI out (USB)
+
+The FM-1 sends over **USB-MIDI** (channel 1), so a computer or phone can record or play another instrument from it:
+
+- the notes you play on the panel keys, as pressed (with the arpeggiator off; the scale lock is not applied to what goes out);
+- the arpeggiator's notes, when it is on (instead of the raw keys), and the sequencer's notes while it plays: these are the notes you hear, after the scale lock;
+- an **all notes off** (CC 123) when you change patch or hold HOME (panic).
+
+Notes arriving on MIDI in are not echoed out (there is no MIDI thru).
+
+### USB audio
+
+The FM-1 appears as a stereo audio input (16-bit, 44.1 kHz) to your computer, so you can record it directly.
+
+### The TRS jack does nothing
+
+Check the cable is a DIN-to-TRS **type A** one (the polarity differs from type B), that it goes to the keyboard's MIDI OUT, and that it is plugged into the MIDI IN jack. Notes arriving over USB-MIDI still work either way. If you find it still silent, tell us which keyboard and cable.
+
 ## Notes
 
 - A frame is sent to the screen in eight strips, so you may see a faint seam move down the picture. That is normal.

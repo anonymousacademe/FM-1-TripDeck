@@ -1,0 +1,30 @@
+# MIDI in over the TRS jack ("uart" = raw bytes on the jack, parsed as firmware/src/midi_uart.c does) and MIDI out over USB.
+#   .\fm1.ps1 host tripdeck tests/midi.txt > build\host\midi-trace.txt ; python tests\check_midi.py build\host\midi-trace.txt
+# A  running status: one status byte, three notes (C4 E4 G4 at velocity 100)
+100 uart 90 3C 64 40 64 43 64
+# B  note offs with a clock byte in the middle of messages (real time may come anywhere)
+600 uart 80 3C 00 F8 40 00 43 F8 00
+# C  a SysEx on the jack is ignored; the note after it plays (C5, velocity 80); note on with velocity 0 is a note off
+900 uart F0 7E 7F 06 01 F7 90 48 50
+1100 uart 90 48 00
+# D  program change picks patch 4 (index 3)
+1300 uart C0 03
+# E  pitch wheel: up to the top, then back to the middle
+1500 uart E0 7F 7F
+1600 uart E0 00 40
+# F  all notes off (CC 123) also goes out over USB
+1800 uart 90 3C 64 90 3E 64
+2100 uart B0 7B 00
+# G  the arpeggiator plays an external chord: its notes go out over USB-MIDI
+2400 btn 10
+2500 uart 90 3C 64 90 40 64 90 43 64
+4300 uart 80 3C 00 80 40 00 80 43 00
+4400 btn 10
+4500 btn 10
+# H  a panel key with the arp off goes out directly (F3 = note 53, velocity 100)
+5000 keys 0x1
+5200 keys 0
+# I  the sequencer's notes go out (the default line starts with an accent on A2 = 45)
+5600 btn 12
+7000 btn 12
+8000 end

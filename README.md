@@ -19,7 +19,8 @@ a vowel filter, an echo that spirals in pitch, scale lock, and a TRIP mode that 
 | **Scale lock** | Keys, MIDI, arpeggiator and sequencer snap to major, minor, dorian, phrygian, bhairav, pentatonic or whole tone scales, in any key. |
 | **TRIP** | The knobs that colour the sound drift slowly by themselves. |
 | **What you hear is what you see** | Every note flashes the picture; cutoff, resonance, reverb, the LFO and the held note colour it. |
-| **Play** | 4 voices, arpeggiator, 32-step sequencer, 8 patches, USB-MIDI in and out, USB audio. |
+| **Play** | 4 voices, arpeggiator, 32-step sequencer, 8 patches, USB audio. |
+| **MIDI** | In from an external keyboard over the **TRS jack** (DIN-to-TRS type A cable) or USB: notes (through the scale lock), pitch wheel, program change, all-notes-off, six CCs. Out over USB: the keys, the arpeggiator and the sequencer. |
 
 The manual is [docs/MANUAL.md](docs/MANUAL.md).
 
@@ -51,8 +52,8 @@ TripDeck replaces the settings saved by an earlier TripDeck or CyberDeck. Back t
 ### The host and its tests
 
 `tests/run_host.sh` runs `firmware/src/tripdeck.c` on your computer with a script: `tests/host.c` reads one line per event
-(`T keys MASK`, `T btn ID [MS]`, `T enc ID N`, `T param IDX VAL`, `T midi ST D1 D2`, `T shot`, `T splash`, `T end`). The scripts in
-`tests/` go through every page (`pages.txt`), the loading screen (`boot.txt`), the knobs, the sequencer, and mutate.
+(`T keys MASK`, `T btn ID [MS]`, `T enc ID N`, `T param IDX VAL`, `T midi ST D1 D2`, `T uart B0 B1 ...`, `T shot`, `T splash`, `T end`). The scripts in
+`tests/` go through every page (`pages.txt`), the loading screen (`boot.txt`), the knobs, the sequencer, and mutate. `midi.txt` feeds raw bytes to the TRS-jack parser and checks the notes sent out over USB: `tests/run_host.sh tests/midi.txt > build/host/midi-trace.txt; python3 tests/check_midi.py build/host/midi-trace.txt`.
 
 ### When it goes wrong
 
