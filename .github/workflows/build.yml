@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     container: konsumer/foma-toolchain
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: pip3 install --break-system-packages Pillow
       - name: host tests
         run: |
@@ -28,7 +28,7 @@ jobs:
           else
             sh build.sh
           fi
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: firmware
           path: build/*.fwsc
