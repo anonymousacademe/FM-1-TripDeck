@@ -1,0 +1,40 @@
+# Builds the firmware in the foma toolchain image (JieLi toolchain + AC79 SDK), runs the host tests,
+# and keeps build/*.fwsc as a "firmware" artifact. Tags (v0.3) build with --release and attach it to a release.
+name: build
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: konsumer/foma-toolchain
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip3 install --break-system-packages Pillow
+      - name: host tests
+        run: |
+          sh tests/run_host.sh tests/pages.txt
+          sh tests/run_host.sh tests/midi.txt > build/host/midi-trace.txt
+          python3 tests/check_midi.py build/host/midi-trace.txt
+      - name: firmware
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = tag ]; then
+            sh build.sh --release "${GITHUB_REF_NAME#v}"
+          else
+            sh build.sh
+          fi
+      - uses: actions/upload-artifact@v6
+        with:
+          name: firmware
+          path: build/*.fwsc
+          if-no-files-found: error
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          files: build/*.fwsc
+          fail_on_unmatched_files: true
